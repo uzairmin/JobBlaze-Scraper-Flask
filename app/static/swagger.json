@@ -1,0 +1,103 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Scraper API",
+    "description": "API for running web scrapers",
+    "version": "1.0"
+  },
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "scraper",
+      "description": "Operations related to running web scrapers"
+    }
+  ],
+  "paths": {
+    "/run-scraper": {
+      "post": {
+        "tags": [
+          "scraper"
+        ],
+        "summary": "Run a web scraper",
+        "description": "Starts a web scraper for a specified source",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Scraper data",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "properties": {
+                "source": {
+                  "type": "string",
+                  "description": "The source name of the scraper"
+                },
+                "links": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "job_type": {
+                        "type": "string",
+                        "description": "The job type of the link/url"
+                      },
+                      "job_url": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "description": "List of links to scrape"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Scraper started successfully",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "message": {
+                  "type": "string",
+                  "description": "Success message"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "description": "Error message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "description": "Error message"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

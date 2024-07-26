@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  scrapers:
+    build:
+      context: .
+    ports:
+      - "8080:8080"
+    volumes: 
+      - py-packages:/usr/local/lib/python3.10/site-packages/
+      - .:/app
+    env_file:
+      - .flaskenv
+      - .env
+
+volumes:
+  py-packages:
